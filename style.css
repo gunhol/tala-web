@@ -1,0 +1,157 @@
+:root {
+  /* Colors */
+  --bg-dark-overlay: rgba(15, 10, 8, 0.65);
+  --bg-glass: rgba(30, 20, 15, 0.4);
+  --border-glass: rgba(255, 255, 255, 0.15);
+  --text-primary: #f8f5f0; /* Soft oat/cream */
+  --text-secondary: #dcd0c0;
+  
+  /* Typography */
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background-color: #000;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base link styles */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Layout */
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+/* Hero Background */
+.hero-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-image: url('/hero-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-dark-overlay);
+  z-index: 1;
+}
+
+/* Glassmorphism Content Card */
+.content-card {
+  position: relative;
+  z-index: 10;
+  background-color: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass);
+  border-radius: 24px;
+  padding: 3rem 4rem;
+  text-align: center;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: fadeInContent 1.5s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes fadeInContent {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logo-title {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 8vw, 6rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.concept-text {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Footer & Socials */
+.social-footer {
+  position: absolute;
+  bottom: 2rem;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+}
+
+.social-link {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  transition: color 0.3s ease, opacity 0.3s ease;
+  padding: 0.5rem 1rem;
+  position: relative;
+  display: inline-block;
+  opacity: 0.8;
+}
+
+.social-link::after {
+  content: '';
+  position: absolute;
+  width: calc(100% - 2rem);
+  height: 1px;
+  bottom: 0.25rem;
+  left: 1rem;
+  background-color: var(--text-primary);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.social-link:hover {
+  color: var(--text-primary);
+  opacity: 1;
+}
+
+.social-link:hover::after {
+  transform: scaleX(1);
+}

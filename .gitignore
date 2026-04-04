@@ -1,0 +1,23 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Node
+node_modules/
+
+# Production
+dist/
+dist-ssr/
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+
+# Custom
+.agent/
+.worktrees/
