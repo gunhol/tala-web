@@ -23,6 +23,7 @@ body {
   background-color: #000;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -113,7 +114,8 @@ a {
 /* Footer & Socials */
 .social-footer {
   position: absolute;
-  bottom: 2rem;
+  bottom: 3rem;
+  padding-bottom: env(safe-area-inset-bottom);
   left: 0;
   width: 100%;
   text-align: center;
