@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  base: './', // Ensures relative paths for assets for GitHub Pages
+  base: '/tala-web/', // Set base to repository name for GitHub Pages
 })
