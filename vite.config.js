@@ -7,7 +7,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        dark: resolve(__dirname, 'index-dark.html'),
+        dark: resolve(__dirname, 'index-min.html'),
       },
     },
   },
