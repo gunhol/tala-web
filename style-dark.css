@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --off-white: #e8e8e8;
+  --muted: #555555;
+  --accent: #c8b08a; /* warm gold — the only warm note */
+  --rule: rgba(255, 255, 255, 0.12);
+
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ─── Layout ─────────────────────────────────────────────── */
+
+#app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  flex: 1;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 1fr;
+  padding: clamp(2rem, 5vw, 4rem);
+  min-height: 0;
+}
+
+/* ─── Top bar ─────────────────────────────────────────────── */
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--rule);
+  animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.brand-mark {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: -0.01em;
+  color: var(--white);
+}
+
+.top-label {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ─── Center content ──────────────────────────────────────── */
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(3rem, 10vw, 8rem) 0;
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.headline-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.headline-line {
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 14vw, 11rem);
+  font-weight: 300;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  display: block;
+}
+
+.headline-line.italic {
+  font-style: italic;
+  color: var(--off-white);
+}
+
+.headline-line.offset {
+  /* push second line right for typographic rhythm */
+  padding-left: clamp(2rem, 8vw, 8rem);
+}
+
+/* ─── Divider rule ────────────────────────────────────────── */
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--rule);
+  margin: clamp(2rem, 5vw, 3.5rem) 0;
+  animation: expandWidth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+  transform-origin: left;
+}
+
+/* ─── Location line ───────────────────────────────────────── */
+
+.location-line {
+  font-family: var(--font-display);
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+}
+
+.info-label {
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.info-value {
+  font-family: var(--font-display);
+  font-size: clamp(0.9rem, 1.5vw, 1.125rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--off-white);
+  letter-spacing: 0.01em;
+}
+
+/* ─── Bottom bar ──────────────────────────────────────────── */
+
+.bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--rule);
+  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.status-dot-group {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.status-text {
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.social-link-dark {
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.25s ease;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.social-link-dark::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.social-link-dark:hover {
+  color: var(--white);
+}
+
+.social-link-dark:hover::after {
+  transform: scaleX(1);
+}
+
+/* ─── Animations ──────────────────────────────────────────── */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes expandWidth {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* ─── Responsive ──────────────────────────────────────────── */
+
+@media (max-width: 480px) {
+  .headline-line.offset {
+    padding-left: 1rem;
+  }
+
+  .info-row {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+}
