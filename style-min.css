@@ -3,27 +3,32 @@
 /* ─── Theme tokens ────────────────────────────────────────── */
 
 :root {
-  /* Dark theme (default) */
-  --bg:         #000000;
-  --text:       #ffffff;
-  --text-off:   #e8e8e8;
-  --muted:      #555555;
-  --rule:       rgba(255, 255, 255, 0.12);
-  --accent:     #c8b08a;
-
   --font-display: 'Cormorant Garamond', serif;
   --font-body:    'DM Sans', sans-serif;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg:       #ffffff;
-    --text:     #000000;
-    --text-off: #1a1a1a;
-    --muted:    #999999;
-    --rule:     rgba(0, 0, 0, 0.12);
-    --accent:   #8a6840;
-  }
+/* Night */
+[data-theme="dark"] {
+  --bg:       #000000;
+  --text:     #ffffff;
+  --text-off: #e0e0e0;
+  --muted:    #555555;
+  --rule:     rgba(255, 255, 255, 0.11);
+  --accent:   #c8b08a;
+  --toggle-color: rgba(255, 255, 255, 0.45);
+  --toggle-hover: rgba(255, 255, 255, 0.9);
+}
+
+/* Day */
+[data-theme="light"] {
+  --bg:       #f2ede7;   /* warm off-white, like unbleached paper */
+  --text:     #0d0d0d;
+  --text-off: #1c1c1c;
+  --muted:    #999999;
+  --rule:     rgba(0, 0, 0, 0.10);
+  --accent:   #8a6840;
+  --toggle-color: rgba(0, 0, 0, 0.35);
+  --toggle-hover: rgba(0, 0, 0, 0.85);
 }
 
 /* ─── Reset ───────────────────────────────────────────────── */
@@ -46,6 +51,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
+  /* smooth theme transitions */
+  transition: background-color 0.6s ease, color 0.6s ease;
 }
 
 a {
@@ -58,6 +65,7 @@ a {
 #app {
   width: 100%;
   height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
 }
@@ -65,10 +73,48 @@ a {
 .page {
   flex: 1;
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: auto 1fr auto;
   grid-template-columns: 1fr;
   padding: clamp(2rem, 5vw, 4rem);
   min-height: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Star field (night only) ─────────────────────────────── */
+
+.star-field {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+[data-theme="dark"] .star-field {
+  opacity: 1;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+/* Sizes */
+.star.sz-s { width: 1px;   height: 1px;   opacity: 0.35; }
+.star.sz-m { width: 1.5px; height: 1.5px; opacity: 0.55; }
+.star.sz-l { width: 2px;   height: 2px;   opacity: 0.75; }
+
+/* Randomised twinkle animations */
+.star:nth-child(3n)   { animation: twinkle 3.1s ease-in-out infinite; }
+.star:nth-child(3n+1) { animation: twinkle 4.7s ease-in-out 1.2s infinite; }
+.star:nth-child(3n+2) { animation: twinkle 2.8s ease-in-out 2.5s infinite; }
+
+@keyframes twinkle {
+  0%, 100% { opacity: inherit; transform: scale(1); }
+  50%       { opacity: 0.1;    transform: scale(0.6); }
 }
 
 /* ─── Top bar ─────────────────────────────────────────────── */
@@ -79,7 +125,14 @@ a {
   justify-content: space-between;
   padding-bottom: clamp(2rem, 5vw, 4rem);
   border-bottom: 1px solid var(--rule);
+  transition: border-color 0.6s ease;
   animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.top-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
 }
 
 .brand-mark {
@@ -89,6 +142,7 @@ a {
   font-style: italic;
   letter-spacing: -0.01em;
   color: var(--text);
+  transition: color 0.6s ease;
 }
 
 .top-label {
@@ -98,7 +152,42 @@ a {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
+  transition: color 0.6s ease;
 }
+
+/* ─── Theme toggle ────────────────────────────────────────── */
+
+.theme-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--toggle-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  transition: color 0.3s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.theme-toggle:hover {
+  color: var(--toggle-hover);
+  transform: rotate(30deg) scale(1.15);
+}
+
+.theme-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Show sun in dark mode (click → go to light) */
+[data-theme="dark"]  .icon-sun  { display: block; }
+[data-theme="dark"]  .icon-star { display: none; }
+
+/* Show star in light mode (click → go to dark) */
+[data-theme="light"] .icon-star { display: block; }
+[data-theme="light"] .icon-sun  { display: none; }
 
 /* ─── Center content ──────────────────────────────────────── */
 
@@ -124,6 +213,7 @@ a {
   letter-spacing: -0.03em;
   color: var(--text);
   display: block;
+  transition: color 0.6s ease;
 }
 
 .headline-line.italic {
@@ -144,6 +234,7 @@ a {
   margin: clamp(2rem, 5vw, 3.5rem) 0;
   animation: expandWidth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
   transform-origin: left;
+  transition: background-color 0.6s ease;
 }
 
 /* ─── Location line ───────────────────────────────────────── */
@@ -156,6 +247,7 @@ a {
   color: var(--muted);
   letter-spacing: 0.08em;
   animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+  transition: color 0.6s ease;
 }
 
 /* ─── Bottom bar ──────────────────────────────────────────── */
@@ -168,17 +260,20 @@ a {
   border-top: 1px solid var(--rule);
   animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
   padding-bottom: env(safe-area-inset-bottom);
+  transition: border-color 0.6s ease;
 }
 
+/* The tala star — the only warm accent on the page */
 .status-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background-color: var(--accent);
-  animation: pulse 3s ease-in-out infinite;
+  animation: pulse 3.5s ease-in-out infinite;
+  transition: background-color 0.6s ease;
 }
 
-/* ─── Animations ──────────────────────────────────────────── */
+/* ─── Keyframes ───────────────────────────────────────────── */
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
@@ -201,8 +296,8 @@ a {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.3; }
+  0%, 100% { opacity: 1;   transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.75); }
 }
 
 /* ─── Responsive ──────────────────────────────────────────── */
