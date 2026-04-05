@@ -12,23 +12,23 @@
   --bg:       #000000;
   --text:     #ffffff;
   --text-off: #e0e0e0;
-  --muted:    #555555;
-  --rule:     rgba(255, 255, 255, 0.11);
+  --muted:    #909090; /* ~5.9:1 on black — WCAG AA ✓ */
+  --rule:     rgba(255, 255, 255, 0.13);
   --accent:   #c8b08a;
-  --toggle-color: rgba(255, 255, 255, 0.45);
-  --toggle-hover: rgba(255, 255, 255, 0.9);
+  --toggle-color: rgba(255, 255, 255, 0.65);
+  --toggle-hover: #ffffff;
 }
 
 /* Day */
 [data-theme="light"] {
-  --bg:       #f2ede7;   /* warm off-white, like unbleached paper */
+  --bg:       #f2ede7;   /* warm off-white, unbleached paper */
   --text:     #0d0d0d;
   --text-off: #1c1c1c;
-  --muted:    #999999;
-  --rule:     rgba(0, 0, 0, 0.10);
+  --muted:    #5a5a5a; /* ~5.9:1 on #f2ede7 — WCAG AA ✓ */
+  --rule:     rgba(0, 0, 0, 0.12);
   --accent:   #8a6840;
-  --toggle-color: rgba(0, 0, 0, 0.35);
-  --toggle-hover: rgba(0, 0, 0, 0.85);
+  --toggle-color: rgba(0, 0, 0, 0.6);
+  --toggle-hover: #0d0d0d;
 }
 
 /* ─── Reset ───────────────────────────────────────────────── */
@@ -147,9 +147,9 @@ a {
 
 .top-label {
   font-family: var(--font-body);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 400;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
   transition: color 0.6s ease;
@@ -160,25 +160,25 @@ a {
 .theme-toggle {
   background: none;
   border: none;
-  padding: 0;
+  padding: 4px;
   cursor: pointer;
   color: var(--toggle-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  width: 32px;
+  height: 32px;
   transition: color 0.3s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .theme-toggle:hover {
   color: var(--toggle-hover);
-  transform: rotate(30deg) scale(1.15);
+  transform: rotate(22deg) scale(1.1);
 }
 
 .theme-toggle svg {
-  width: 16px;
-  height: 16px;
+  width: 22px;
+  height: 22px;
 }
 
 /* Show sun in dark mode (click → go to light) */
@@ -241,11 +241,11 @@ a {
 
 .location-line {
   font-family: var(--font-display);
-  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
   font-weight: 300;
   font-style: italic;
   color: var(--muted);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
   transition: color 0.6s ease;
 }
