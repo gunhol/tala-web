@@ -91,6 +91,14 @@ a {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .content-card {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .logo-title {
   font-family: var(--font-display);
   font-size: clamp(4rem, 8vw, 6rem);
@@ -134,6 +142,14 @@ a {
   position: relative;
   display: inline-block;
   opacity: 0.8;
+  cursor: pointer;
+}
+
+.social-link:focus-visible {
+  outline: 1px solid var(--text-primary);
+  outline-offset: 4px;
+  border-radius: 2px;
+  opacity: 1;
 }
 
 .social-link::after {
